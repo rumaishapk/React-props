@@ -1,22 +1,18 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0);
-  const handleclick = () => setCount(count + 1);
-  const handleclick2 = () => {
-    count == 0 ? null : setCount(count - 1);
-  };
+const App = () => {
+  const [time, setTime] = useState();
+  function times() {
+    setTime(new Date().toLocaleTimeString());
+  }
+  setInterval(times, 1000);
 
   return (
-    <div className="box">
-      counter
-      <br />
-      {count}
-      <br />
-      <button onClick={handleclick}>+</button>
-      <button onClick={handleclick2}>-</button>
+    <div>
+      <h1>{time}</h1>
+      <button>Get Time</button>
     </div>
   );
-}
+};
 
 export default App;
