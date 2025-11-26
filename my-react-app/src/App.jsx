@@ -1,42 +1,33 @@
-import cars from "../practice";
+import React, { useState } from "react";
 
 const App = () => {
-  const [honda,tesla] = cars;
-  const {
-    speedStats: { topSpeed: hondaTopSpeed },
-  } = honda;
-  const {
-    speedStats: { topSpeed: teslaTopSpeed },
-  } = tesla;
+  const [headingText, setHeadingText] = useState("hello");
+  const [isMousedOver, setMouseOver] = useState(false);
 
-  const {
-    coloursByPopularity: [hondaTopColour],
-  } = honda;
-  const {
-    coloursByPopularity: [teslaTopColour],
-  } = tesla;
+  function handleClick() {
+    setHeadingText("submitted");
+  }
+  function handleMouseOver() {
+    setMouseOver(true);
+  }
+  function handlemouseOout() {
+    setMousedOver(false);
+  }
 
   return (
-    <table>
-    <tr>
-      <th>Brand</th>
-      <th>Top Speed</th>
-      <th>Top Colour</th>
-    </tr>
-    <tr>
-      <td>{tesla.model}</td>
-      <td>{teslaTopSpeed}</td>
-      <td>{teslaTopColour}</td>
-    </tr>
-    <tr>
-      <td>{honda.model}</td>
-      <td>{hondaTopSpeed}</td>
-      <td>{hondaTopColour}</td>
-    </tr>
-  </table>
-  )
-     
-  
+    <div className="container">
+      <h1>{headingText}</h1>
+      <input type="text" placeholder="What's your name?" />
+      <button
+        style={{ backgroundColor: isMousedOver ? "black" : "white" }}
+        onClick={handleClick}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handlemouseOout}
+      >
+        Submit
+      </button>
+    </div>
+  );
 };
 
 export default App;
