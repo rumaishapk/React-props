@@ -1,31 +1,39 @@
 import React, { useState } from "react";
 
 const App = () => {
-  const [headingText, setHeadingText] = useState("hello");
-  const [isMousedOver, setMouseOver] = useState(false);
+  const [InputText, setInputText] = useState("");
+  const [item, setItem] = useState([]);
 
-  function handleClick() {
-    setHeadingText("submitted");
+  function handleChange() {
+    const newValue = event.target.value;
+    setInputText(newValue);
   }
-  function handleMouseOver() {
-    setMouseOver(true);
-  }
-  function handlemouseOout() {
-    setMousedOver(false);
+
+  function addItem(){
+     setItem((prevItems) => {
+         return[...prevItems,InputText]
+     })
+     setInputText("")
   }
 
   return (
     <div className="container">
-      <h1>{headingText}</h1>
-      <input type="text" placeholder="What's your name?" />
-      <button
-        style={{ backgroundColor: isMousedOver ? "black" : "white" }}
-        onClick={handleClick}
-        onMouseOver={handleMouseOver}
-        onMouseOut={handlemouseOout}
-      >
-        Submit
-      </button>
+      <div className="heading">
+        <h1>To-Do List</h1>
+      </div>
+      <div className="form">
+        <input onChange={handleChange} type="text" value={InputText} />
+        <button>
+          <span onClick={addItem}>Add</span>
+        </button>
+      </div>
+      <div>
+        <ul>
+          {item.map((todoitem) => {
+            return <li>{todoitem}</li>;
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
